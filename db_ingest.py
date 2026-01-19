@@ -1,79 +1,76 @@
 import psycopg2
-import requests
-from tabulate import tabulate   # <-- new import
+from tabulate import tabulate
+from api_wrappers.openweather import get_weather_data
 
-# Connection parameters
-DB_HOST = "localhost"        
-DB_NAME = "energy_db"        
-DB_USER = "postgres"         
-DB_PASS = "PdM"               # <-- your PostgreSQL password
-
-# Example sensor API endpoint (replace with your real sensor URL)
-SENSOR_API = "http://example.com/api/sensor"
-
-def fetch_sensor_data():
-    """Fetch new data from web sensor API."""
-    response = requests.get(SENSOR_API)
-    data = response.json()
-    return (
-        data["timestamp"],
-        float(data["temperature"]),
-        float(data["humidity"]),
-        float(data["irradiance"]),
-        float(data["wind_speed"])
-    )
+DB_HOST = "localhost"
+DB_NAME = "energy_db"
+DB_USER = "postgres"
+DB_PASS = "PdM"   # <-- SQL password
 
 def save_to_log(file_path, row):
-    """Append sensor data to sensor_logs.txt."""
+    """Append sensor data to sensor_log.txt"""
     with open(file_path, "a") as f:
         f.write(",".join(map(str, row)) + "\n")
 
 def ingest_to_db(row):
-    """Insert sensor data into PostgreSQL with duplicate protection."""
-    try:
-        conn = psycopg2.connect(
-            host=DB_HOST,
-            dbname=DB_NAME,
-            user=DB_USER,
-            password=DB_PASS
-        )
-        cur = conn.cursor()
+    """Insert sensor data into PostgreSQL"""
+    conn = psycopg2.connect(
+        host=DB_HOST, dbname=DB_NAME, user=DB_USER, password=DB_PASS
+    )
+    cur = conn.cursor()
 
-        cur.execute("""
-            INSERT INTO sensor_data (timestamp, temperature, humidity, irradiance, wind_speed)
-            VALUES (%s, %s, %s, %s, %s)
-            ON CONFLICT (timestamp) DO NOTHING;
-        """, row)
+    # Insert into sensor_data table
+    cur.execute("""
+        INSERT INTO sensor_data (timestamp, wind_speed, humidity, irradiance, temperature)
+        VALUES (%s, %s, %s, %s, %s)
+        ON CONFLICT (timestamp) DO NOTHING;
+    """, (row[0], row[1], row[2], row[3], 0))  # temperature dummy for now
 
-        conn.commit()
+    conn.commit()
+    cur.close()
+    conn.close()
 
-        # Fetch last 5 rows for display
-        cur.execute("SELECT * FROM sensor_data ORDER BY timestamp DESC LIMIT 5;")
-        rows = cur.fetchall()
+def export_to_html(file_path="sensor_output.html"):
+    """Export latest 50 rows to HTML"""
+    conn = psycopg2.connect(
+        host=DB_HOST, dbname=DB_NAME, user=DB_USER, password=DB_PASS
+    )
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM sensor_data ORDER BY timestamp DESC LIMIT 50;")
+    rows = cur.fetchall()
 
-        # Format timestamp without microseconds
-        formatted_rows = []
-        for r in rows:
-            ts = r[1].strftime("%Y-%m-%d %H:%M:%S")
-            formatted_rows.append((r[0], ts, r[2], r[3], r[4], r[5]))
+    formatted_rows = []
+    for r in rows:
+        ts = r[1].strftime("%Y-%m-%d %H:%M:%S")  # no microseconds
+        formatted_rows.append((r[0], ts, r[2], r[3], r[4], r[5]))
 
-        print("📊 Latest sensor_data rows:")
-        print(tabulate(formatted_rows, headers=["ID","Timestamp","Temp","Humidity","Irradiance","Wind"], tablefmt="psql"))
+    html = f"""
+    <html>
+    <head>
+        <title>Sensor Data Output</title>
+        <style>
+            body {{ font-family: Arial; margin: 20px; }}
+            table {{ border-collapse: collapse; width: 100%; }}
+            th, td {{ border: 1px solid #ccc; padding: 8px; text-align: center; }}
+            th {{ background-color: #f4f4f4; }}
+        </style>
+    </head>
+    <body>
+        <h2>Latest 50 Sensor Data Rows (Wind & Solar)</h2>
+        {tabulate(formatted_rows, headers=["ID","Timestamp","Temp","Humidity","Irradiance","Wind"], tablefmt="html")}
+    </body>
+    </html>
+    """
 
-        cur.close()
-        conn.close()
-        print("✅ Data ingested into database:", row)
+    with open(file_path, "w") as f:
+        f.write(html)
 
-    except Exception as e:
-        print("❌ Error inserting into database:", e)
+    cur.close()
+    conn.close()
+    print(f"✅ HTML output written to {file_path}")
 
 if __name__ == "__main__":
-    # Step 1: Fetch new data from web sensor
-    new_row = fetch_sensor_data()
-
-    # Step 2: Save to sensor_logs.txt
-    save_to_log("sensor_logs.txt", new_row)
-    print("✅ Data appended to sensor_logs.txt")
-
-    # Step 3: Insert into PostgreSQL
+    new_row = get_weather_data()
+    save_to_log("sensor_log.txt", new_row)
     ingest_to_db(new_row)
+    export_to_html("sensor_output.html")
