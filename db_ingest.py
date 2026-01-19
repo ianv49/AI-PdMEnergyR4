@@ -1,45 +1,49 @@
-import psycopg2   # PostgreSQL connector
+import psycopg2
+from datetime import datetime
 
-# --- Database connection settings ---
-# Replace these with your actual PostgreSQL setup
-DB_HOST = "localhost"          # usually localhost if running locally
-DB_NAME = "your_database_name" # the database you created in PostgreSQL
-DB_USER = "your_username"      # your PostgreSQL username
-DB_PASS = "onsemi111!"      # your PostgreSQL password
+# Connection parameters
+DB_HOST = "localhost"        # PostgreSQL is running locally
+DB_NAME = "energy_db"        # The database you created in psql
+DB_USER = "postgres"         # The superuser you set up
+DB_PASS = "onsemi111!" # Replace with the password you chose during initdb
 
-def ingest_logs():
-    # Connect to PostgreSQL
-    conn = psycopg2.connect(
-        host=DB_HOST,
-        dbname=DB_NAME,
-        user=DB_USER,
-        password=DB_PASS
-    )
-    cur = conn.cursor()
+def ingest_log():
+    try:
+        # Connect to PostgreSQL
+        conn = psycopg2.connect(
+            host=DB_HOST,
+            dbname=DB_NAME,
+            user=DB_USER,
+            password=DB_PASS
+        )
+        print("✅ Connected to PostgreSQL successfully!")
 
-    # Open the sensor log file
-    with open("sensor_logs.txt", "r") as f:
-        for line in f:
-            # Each line looks like:
-            # 2026-01-19 18:53:17, 31.0, 54.12, 655.98, 11.03
-            parts = line.strip().split(", ")
-            if len(parts) == 5:
-                timestamp, temp, hum, irr, wind = parts
+        # Create a cursor to run SQL commands
+        cur = conn.cursor()
 
-                # Insert into the database
-                cur.execute(
-                    """
-                    INSERT INTO sensor_data (timestamp, temperature, humidity, irradiance, wind_speed)
-                    VALUES (%s, %s, %s, %s, %s)
-                    """,
-                    (timestamp, float(temp), float(hum), float(irr), float(wind))
-                )
+        # Example: insert one test row
+        cur.execute("""
+            INSERT INTO sensor_data (timestamp, temperature, humidity, irradiance, wind_speed)
+            VALUES (%s, %s, %s, %s, %s);
+        """, (datetime.now(), 28.5, 65.2, 450.0, 5.8))
 
-    # Commit changes and close connection
-    conn.commit()
-    cur.close()
-    conn.close()
-    print("Logs ingested successfully!")
+        # Commit changes
+        conn.commit()
+        print("✅ Test row inserted!")
+
+        # Fetch last 5 rows
+        cur.execute("SELECT * FROM sensor_data ORDER BY timestamp DESC LIMIT 5;")
+        rows = cur.fetchall()
+        print("📊 Latest sensor_data rows:")
+        for row in rows:
+            print(row)
+
+        # Close connection
+        cur.close()
+        conn.close()
+
+    except Exception as e:
+        print("❌ Error connecting to PostgreSQL:", e)
 
 if __name__ == "__main__":
-    ingest_logs()
+    ingest_log()
