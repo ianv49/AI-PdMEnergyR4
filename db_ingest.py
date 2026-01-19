@@ -2,13 +2,13 @@ import psycopg2
 import requests
 
 # Connection parameters
-DB_HOST = "localhost"
-DB_NAME = "energy_db"
-DB_USER = "postgres"
-DB_PASS = "PdM"
+DB_HOST = "localhost"        # PostgreSQL is running locally
+DB_NAME = "energy_db"        # The database you created in psql
+DB_USER = "postgres"         # The superuser you set up
+DB_PASS = "PdM"              # <-- Your PostgreSQL password
 
-# Example sensor API endpoint
-SENSOR_API = "http://example.com/api/sensor"  # replace with your real sensor URL
+# Example sensor API endpoint (replace with your real sensor URL)
+SENSOR_API = "http://example.com/api/sensor"
 
 def fetch_sensor_data():
     """Fetch new data from web sensor API."""
