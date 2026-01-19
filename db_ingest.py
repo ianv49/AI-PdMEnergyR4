@@ -1,11 +1,12 @@
 import psycopg2
 import requests
+from tabulate import tabulate   # <-- new import
 
 # Connection parameters
-DB_HOST = "localhost"        # PostgreSQL is running locally
-DB_NAME = "energy_db"        # The database you created in psql
-DB_USER = "postgres"         # The superuser you set up
-DB_PASS = "PdM"              # <-- Your PostgreSQL password
+DB_HOST = "localhost"        
+DB_NAME = "energy_db"        
+DB_USER = "postgres"         
+DB_PASS = "PdM"               # <-- your PostgreSQL password
 
 # Example sensor API endpoint (replace with your real sensor URL)
 SENSOR_API = "http://example.com/api/sensor"
@@ -45,6 +46,20 @@ def ingest_to_db(row):
         """, row)
 
         conn.commit()
+
+        # Fetch last 5 rows for display
+        cur.execute("SELECT * FROM sensor_data ORDER BY timestamp DESC LIMIT 5;")
+        rows = cur.fetchall()
+
+        # Format timestamp without microseconds
+        formatted_rows = []
+        for r in rows:
+            ts = r[1].strftime("%Y-%m-%d %H:%M:%S")
+            formatted_rows.append((r[0], ts, r[2], r[3], r[4], r[5]))
+
+        print("📊 Latest sensor_data rows:")
+        print(tabulate(formatted_rows, headers=["ID","Timestamp","Temp","Humidity","Irradiance","Wind"], tablefmt="psql"))
+
         cur.close()
         conn.close()
         print("✅ Data ingested into database:", row)
