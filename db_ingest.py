@@ -42,10 +42,12 @@ def ingest_logs_from_file(file_path):
         rows = cur.fetchall()
         print("📊 Latest sensor_data rows:")
         for row in rows:
-            print(row)
+            # row[1] is the timestamp column
+            ts = row[1].strftime("%Y-%m-%d %H:%M:%S")  # format without microseconds
+            print((row[0], ts, row[2], row[3], row[4], row[5]))
 
         cur.close()
-        conn.close()
+        conn.close()        
 
     except Exception as e:
         print("❌ Error:", e)
