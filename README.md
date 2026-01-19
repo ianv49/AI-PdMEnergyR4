@@ -106,3 +106,5 @@ torch              2.9.1
 typing_extensions  4.15.0
 tzdata             2025.3
 urllib3            2.6.3
+
+always used for activating env; "venv\Scripts\activate.bat"
