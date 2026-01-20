@@ -105,7 +105,8 @@ def fetch_and_display(conn, limit=10):
 # ----------------------------
 if __name__ == "__main__":
     conn = get_connection()
-    ingest_text_file(conn, "../sensor_logs.txt")   # adjust path if needed
-    ingest_csv_file(conn, "../sensor_data.csv")    # optional CSV ingestion
+    ingest_text_file(conn, "data/sensor_logs.txt")
+    ingest_csv_file(conn, "data/sensor_data.csv")   # optional CSV ingestion
+    
     fetch_and_display(conn, limit=10)
     conn.close()
