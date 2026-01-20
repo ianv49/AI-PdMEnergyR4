@@ -24,6 +24,7 @@ AI-EnergyForcastR4/
 ├── db/                     # Database setup and connectors
 │   ├── db_connector.py     # Python script to handles DB connection
 │   ├── db_ingest.py        # Python script to ingestion script (imports connector)
+│   ├── test_connection.py  # Python script for quick connection test
 │   └── schema.sql          # SQL table definitions
 │
 ├── data/                 
