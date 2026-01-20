@@ -40,8 +40,13 @@ def get_connection():
 # ----------------------------
 # Insert Function with Duplicate Handling
 # ----------------------------
+from datetime import datetime
 def insert_sensor_data(conn, timestamp, temperature, humidity, irradiance, wind_speed):
     try:
+        # Parse and reformat timestamp to seconds only
+        ts = datetime.fromisoformat(timestamp)
+        ts = ts.replace(microsecond=0)
+
         with conn.cursor() as cur:
             cur.execute(
                 """
@@ -49,7 +54,7 @@ def insert_sensor_data(conn, timestamp, temperature, humidity, irradiance, wind_
                 VALUES (%s, %s, %s, %s, %s)
                 ON CONFLICT (timestamp) DO NOTHING;
                 """,
-                (timestamp, temperature, humidity, irradiance, wind_speed)
+                (ts, temperature, humidity, irradiance, wind_speed)
             )
         conn.commit()
     except Exception as e:
@@ -75,12 +80,19 @@ def ingest_text_file(conn, filepath="sensor_logs.txt"):
 # ----------------------------
 # Ingest from CSV
 # ----------------------------
-def ingest_csv_file(conn, filepath="sensor_data.csv"):
+def ingest_csv_file(conn, filepath="data/sensor_data.csv"):
     try:
         with open(filepath, newline="") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                insert_sensor_data(conn, row["timestamp"], row["sensor_id"], float(row["value"]))
+                insert_sensor_data(
+                    conn,
+                    row["timestamp"],
+                    float(row["temperature"]),
+                    float(row["humidity"]),
+                    float(row["irradiance"]),
+                    float(row["wind_speed"])
+                )
         logging.info("CSV ingestion complete.")
     except FileNotFoundError:
         logging.warning(f"{filepath} not found.")
