@@ -139,6 +139,7 @@ Phase 5: Enhancements,Optional: pretty table output,Pending
 Phase 6: Next Steps,Automate ingestion (batch file or cron job),Pending
 Phase 6: Next Steps,Extend ingestion for CSV/real sensor streams,Pending
 Phase 6: Next Steps,Dashboard/visualization integration,Pending
+
 ...notes 260120;
 sql password = PdM
 Phase 1: Environment Setup
@@ -174,19 +175,3 @@ Automate ingestion (batch file or cron job) → Pending
 Extend ingestion for CSV/real sensor streams → Pending
 Dashboard/visualization integration → Pending
 Add permanent log file output (logs/ingestion.log) → Pending
-...phase6
-Step 2:Windows Batch File (simple automation)
-    Open Notepad.
-    Paste this:
-        bat
-        @echo off
-        cd /d "D:\My Documents\tools\skul\bsu2024\bsu_mot512_thesis1\GithubVisualStudioCode\AI-EnergyForcastR4"
-        python db\db_ingest.py
-    Save as run_ingest.bat in your repo root.
-    Double‑click it → ingestion runs, logs go to logs/ingestion.log.
-Step 3: Schedule with Task Scheduler
-    Open Task Scheduler (Windows search).
-    Create a new task → “Run Ingestion Daily”.
-    Set trigger → e.g., every day at 8:00 AM.
-    Set action → run run_ingest.bat.
-    Save → ingestion now runs automatically.
