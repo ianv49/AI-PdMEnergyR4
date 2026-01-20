@@ -33,6 +33,10 @@ AI-EnergyForcastR4/
 │   └── db_connector.py   # Python script to insert/read data
 │   └── db_ingest.py      # Python script to move data in sql 
 │
+├── data/                 
+│   ├── sensor_logs.txt   # plain text log file 
+│   └── sensor_data.csv   # CSV file 
+│
 ├── preprocessing/        # Data cleaning scripts
 │   └── preprocess.py     # First script: normalize and clean sensor logs
 │

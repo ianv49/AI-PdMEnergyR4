@@ -3,6 +3,11 @@ import sys
 import psycopg2
 import logging
 import csv
+
+#Update db_ingest.py to load .env:
+from dotenv import load_dotenv
+load_dotenv()
+
 from tabulate import tabulate
 
 # ----------------------------
