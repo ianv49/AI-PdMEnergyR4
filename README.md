@@ -49,7 +49,7 @@ AI-EnergyForcastR4/
 └── notebooks/            # Jupyter notebooks for demos
     └── data_pipeline_demo.ipynb  # Step-by-step interactive demo
 
-### my notes
+#### my notes
 '''bash
 Perfect 🎉 — that package list shows your environment is now fully set up and healthy. You’ve got all the core libraries installed:
 requests → API calls and HTTP requests
@@ -157,15 +157,15 @@ Phase 4: Log Ingestion
 Adapt script to read sensor_logs.txt → Done
 Insert multiple rows from file → Done
 Verify ingestion with query output → Done
-Phase 5: Enhancements
-Handle duplicate entries (unique timestamp + ON CONFLICT) → Pending
+Phase 5 Completion Checklist
 Format timestamp output (seconds only) → Done
-Pretty table output (tabulate) → Done
+Pretty table output → Done
 Row count before/after ingestion → Done
 Skip header line in text ingestion → Done
-Modularize connection into db_connector.py → Done
-Add test_connection.py script → Done
+Modularize connection (db_connector.py) → Done
+Add test script (test_connection.py) → Done
 Show top/bottom rows in test script → Done
+Handle duplicate entries (unique timestamp + ON CONFLICT) → Done 
 Phase 6: Next Steps
 Automate ingestion (batch file or cron job) → Pending
 Extend ingestion for CSV/real sensor streams → Pending
