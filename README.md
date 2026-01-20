@@ -186,4 +186,19 @@ Phase 11: Web-Sensor Data Integration,Integrate PVOutput API for solar PV system
 Phase 11: Web-Sensor Data Integration,Optional: Add other APIs (NOAA, Meteostat, etc.),Pending
 Phase 11: Web-Sensor Data Integration,Normalize and store web-sensor data into sensor_data table,Pending
 Phase 11: Web-Sensor Data Integration,Combine local sensor + web API data for richer analytics,Pending
-
+...Phase 6: Automate Ingestion
+Step 2: Windows Batch File (simple automation)
+    Open Notepad.
+    Paste this:
+        bat
+        @echo off
+        cd /d "D:\My Documents\tools\skul\bsu2024\bsu_mot512_thesis1\GithubVisualStudioCode\AI-EnergyForcastR4"
+        python db\db_ingest.py
+    Save as run_ingest.bat in your repo root.
+    Double‑click it → ingestion runs, logs go to logs/ingestion.log.
+Step 3: Schedule with Task Scheduler
+    Open Task Scheduler (Windows search).
+    Create a new task → “Run Ingestion Daily”.
+    Set trigger → every day at 4:00 PM.
+    Set action → run run_ingest.bat.
+    Save → ingestion now runs automatically.
