@@ -45,6 +45,9 @@ def ingest_text_file(conn, filepath="data/sensor_logs.txt"):
         with open(filepath, "r") as f:
             for line in f:
                 parts = line.strip().split(",")
+                # Skip header line
+                if parts[0].lower() == "timestamp":
+                    continue
                 if len(parts) == 5:
                     timestamp, temperature, humidity, irradiance, wind_speed = parts
                     insert_sensor_data(conn, timestamp, float(temperature), float(humidity), float(irradiance), float(wind_speed))
@@ -53,6 +56,7 @@ def ingest_text_file(conn, filepath="data/sensor_logs.txt"):
         logging.warning(f"{filepath} not found.")
     except Exception as e:
         logging.error(f"Error ingesting text file: {e}")
+
 
 def ingest_csv_file(conn, filepath="data/sensor_data.csv"):
     """Read CSV file and insert rows."""
