@@ -40,16 +40,16 @@ def get_connection():
 # ----------------------------
 # Insert Function with Duplicate Handling
 # ----------------------------
-def insert_sensor_data(conn, timestamp, sensor_id, value):
+def insert_sensor_data(conn, timestamp, temperature, humidity, irradiance, wind_speed):
     try:
         with conn.cursor() as cur:
             cur.execute(
                 """
-                INSERT INTO sensor_data (timestamp, sensor_id, value)
-                VALUES (%s, %s, %s)
+                INSERT INTO sensor_data (timestamp, temperature, humidity, irradiance, wind_speed)
+                VALUES (%s, %s, %s, %s, %s)
                 ON CONFLICT (timestamp) DO NOTHING;
                 """,
-                (timestamp, sensor_id, value)
+                (timestamp, temperature, humidity, irradiance, wind_speed)
             )
         conn.commit()
     except Exception as e:
