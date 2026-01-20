@@ -9,18 +9,18 @@ import os
 # Ensure logs folder exists
 os.makedirs("logs", exist_ok=True)
 
-# Create handlers
-console_handler = logger.StreamHandler()
-file_handler = logger.FileHandler("logs/ingestion.log", mode="a")
+# Create handlers (use logging, not logger)
+console_handler = logging.StreamHandler()
+file_handler = logging.FileHandler("logs/ingestion.log", mode="a")
 
 # Set formatter
-formatter = logger.Formatter("%(asctime)s [%(levelname)s] %(message)s")
+formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
 console_handler.setFormatter(formatter)
 file_handler.setFormatter(formatter)
 
 # Create logger object
-logger = logger.getLogger("ingestion_logger")
-logger.setLevel(logger.INFO)
+logger = logging.getLogger("ingestion_logger")
+logger.setLevel(logging.INFO)
 
 # Avoid duplicate handlers if script is re-run
 if not logger.handlers:
