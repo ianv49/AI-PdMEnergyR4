@@ -1,13 +1,20 @@
 from db_connector import get_connection
 
 def main():
-    # Try to connect
+    # Step 1: Try to connect
     conn = get_connection()
 
-    # If connection works, print success message
-    print("✅ Database connection test successful!")
+    # Step 2: Run a simple query
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SELECT COUNT(*) FROM sensor_data;")
+            result = cur.fetchone()
+            print(f"✅ Database connection test successful!")
+            print(f"📊 sensor_data table has {result[0]} rows.")
+    except Exception as e:
+        print(f"❌ Query failed: {e}")
 
-    # Close connection
+    # Step 3: Close connection
     conn.close()
 
 if __name__ == "__main__":
