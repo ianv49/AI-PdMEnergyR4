@@ -21,6 +21,19 @@ This project develops a cross-platform application for predictive maintenance of
 ```bash
 AI-EnergyForcastR4/
 │
+├── db/                     # Database setup and connectors
+│   ├── db_connector.py     # Python script to handles DB connection
+│   ├── db_ingest.py        # Python script to ingestion script (imports connector)
+│   └── schema.sql          # SQL table definitions
+│
+├── data/                 
+│   ├── sensor_logs.txt   # plain text log file 
+│   └── sensor_data.csv   # CSV file 
+│
+├── .env
+├── requirements.txt      # List of Python dependencies
+├── README.md             # Documentation for setup and usage
+│
 ├── sensors/              # Scripts for sensor data (real or simulated)
 │   └── sensor_ingest.py  # First script: generate or simulate sensor readings
 │
@@ -28,23 +41,12 @@ AI-EnergyForcastR4/
 │   └── openweather.py    # First wrapper: fetch weather data
 │   └── nasa_power.py     # Second wrapper: fetch solar/irradiance data
 │
-├── db/                   # Database setup and connectors
-│   └── schema.sql        # SQL commands to create tables
-│   └── db_connector.py   # Python script to insert/read data
-│   └── db_ingest.py      # Python script to move data in sql 
-│
-├── data/                 
-│   ├── sensor_logs.txt   # plain text log file 
-│   └── sensor_data.csv   # CSV file 
 │
 ├── preprocessing/        # Data cleaning scripts
 │   └── preprocess.py     # First script: normalize and clean sensor logs
 │
-├── notebooks/            # Jupyter notebooks for demos
-│   └── data_pipeline_demo.ipynb  # Step-by-step interactive demo
-│
-├── requirements.txt      # List of Python dependencies
-└── README.md             # Documentation for setup and usage
+└── notebooks/            # Jupyter notebooks for demos
+    └── data_pipeline_demo.ipynb  # Step-by-step interactive demo
 
 ## my notes
 '''bash

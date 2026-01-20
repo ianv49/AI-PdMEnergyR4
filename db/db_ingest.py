@@ -3,12 +3,14 @@ import sys
 import psycopg2
 import logging
 import csv
-
-#Update db_ingest.py to load .env:
-from dotenv import load_dotenv
-load_dotenv()
-
+from datetime import datetime
 from tabulate import tabulate
+from dotenv import load_dotenv
+
+# ----------------------------
+# Load environment variables
+# ----------------------------
+load_dotenv()
 
 # ----------------------------
 # Logging Setup
@@ -38,12 +40,11 @@ def get_connection():
         sys.exit(1)
 
 # ----------------------------
-# Insert Function with Duplicate Handling
+# Insert Function (5 columns)
 # ----------------------------
-from datetime import datetime
 def insert_sensor_data(conn, timestamp, temperature, humidity, irradiance, wind_speed):
     try:
-        # Parse and reformat timestamp to seconds only
+        # Parse timestamp and strip microseconds
         ts = datetime.fromisoformat(timestamp)
         ts = ts.replace(microsecond=0)
 
@@ -63,14 +64,14 @@ def insert_sensor_data(conn, timestamp, temperature, humidity, irradiance, wind_
 # ----------------------------
 # Ingest from Plain Text Logs
 # ----------------------------
-def ingest_text_file(conn, filepath="sensor_logs.txt"):
+def ingest_text_file(conn, filepath="data/sensor_logs.txt"):
     try:
         with open(filepath, "r") as f:
             for line in f:
                 parts = line.strip().split(",")
-                if len(parts) == 3:
-                    timestamp, sensor_id, value = parts
-                    insert_sensor_data(conn, timestamp, sensor_id, float(value))
+                if len(parts) == 5:
+                    timestamp, temperature, humidity, irradiance, wind_speed = parts
+                    insert_sensor_data(conn, timestamp, float(temperature), float(humidity), float(irradiance), float(wind_speed))
         logging.info("Text file ingestion complete.")
     except FileNotFoundError:
         logging.warning(f"{filepath} not found.")
@@ -118,7 +119,6 @@ def fetch_and_display(conn, limit=10):
 if __name__ == "__main__":
     conn = get_connection()
     ingest_text_file(conn, "data/sensor_logs.txt")
-    ingest_csv_file(conn, "data/sensor_data.csv")   # optional CSV ingestion
-    
+    ingest_csv_file(conn, "data/sensor_data.csv")
     fetch_and_display(conn, limit=10)
     conn.close()
