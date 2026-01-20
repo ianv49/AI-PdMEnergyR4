@@ -10,17 +10,17 @@ import os
 os.makedirs("logs", exist_ok=True)
 
 # Create handlers
-console_handler = logging.StreamHandler()
-file_handler = logging.FileHandler("logs/ingestion.log", mode="a")
+console_handler = logger.StreamHandler()
+file_handler = logger.FileHandler("logs/ingestion.log", mode="a")
 
 # Set formatter
-formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
+formatter = logger.Formatter("%(asctime)s [%(levelname)s] %(message)s")
 console_handler.setFormatter(formatter)
 file_handler.setFormatter(formatter)
 
-# Get root logger and attach handlers
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+# Create logger object
+logger = logger.getLogger("ingestion_logger")
+logger.setLevel(logger.INFO)
 
 # Avoid duplicate handlers if script is re-run
 if not logger.handlers:
@@ -28,12 +28,12 @@ if not logger.handlers:
     logger.addHandler(file_handler)
 
 # Logging setup: console + file
-logging.basicConfig(
-    level=logging.INFO,
+logger.basicConfig(
+    level=logger.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.StreamHandler(),                        # print to console
-        logging.FileHandler("logs/ingestion.log", mode="a")  # save to file
+        logger.StreamHandler(),                        # print to console
+        logger.FileHandler("logs/ingestion.log", mode="a")  # save to file
     ]
 )
 
@@ -45,7 +45,7 @@ def count_rows(conn):
             result = cur.fetchone()
             return result[0]
     except Exception as e:
-        logging.error(f"Error counting rows: {e}")
+        logger.error(f"Error counting rows: {e}")
         return None
 
 def insert_sensor_data(conn, timestamp, temperature, humidity, irradiance, wind_speed):
@@ -63,7 +63,7 @@ def insert_sensor_data(conn, timestamp, temperature, humidity, irradiance, wind_
             )
         conn.commit()
     except Exception as e:
-        logging.error(f"Insert failed: {e}")
+        logger.error(f"Insert failed: {e}")
 
 def ingest_text_file(conn, filepath="data/sensor_logs.txt"):
     """Read plain text log file and insert rows."""
@@ -79,9 +79,9 @@ def ingest_text_file(conn, filepath="data/sensor_logs.txt"):
                     insert_sensor_data(conn, timestamp, float(temperature), float(humidity), float(irradiance), float(wind_speed))
         logger.info("Text file ingestion complete.")
     except FileNotFoundError:
-        logging.warning(f"{filepath} not found.")
+        logger.warning(f"{filepath} not found.")
     except Exception as e:
-        logging.error(f"Error ingesting text file: {e}")
+        logger.error(f"Error ingesting text file: {e}")
 
 
 def ingest_csv_file(conn, filepath="data/sensor_data.csv"):
@@ -100,9 +100,9 @@ def ingest_csv_file(conn, filepath="data/sensor_data.csv"):
                 )
         logger.info("CSV ingestion complete.")
     except FileNotFoundError:
-        logging.warning(f"{filepath} not found.")
+        logger.warning(f"{filepath} not found.")
     except Exception as e:
-        logging.error(f"Error ingesting CSV file: {e}")
+        logger.error(f"Error ingesting CSV file: {e}")
 
 def fetch_and_display(conn, limit=10):
     """Display latest rows in a pretty table."""
@@ -113,7 +113,7 @@ def fetch_and_display(conn, limit=10):
             headers = [desc[0] for desc in cur.description]
             print(tabulate(rows, headers=headers, tablefmt="psql"))
     except Exception as e:
-        logging.error(f"Error fetching rows: {e}")
+        logger.error(f"Error fetching rows: {e}")
 
 if __name__ == "__main__":
     conn = get_connection()

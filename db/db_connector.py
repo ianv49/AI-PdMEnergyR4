@@ -8,10 +8,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Logging setup
-logging.basicConfig(
-    level=logging.INFO,
+logger.basicConfig(
+    level=logger.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[logging.StreamHandler()]
+    handlers=[logger.StreamHandler()]
 )
 
 def get_connection():
@@ -27,6 +27,6 @@ def get_connection():
         logger.info("Connected to PostgreSQL successfully.")
         return conn
     except Exception as e:
-        logging.error(f"Database connection failed: {e}")
+        logger.error(f"Database connection failed: {e}")
         sys.exit(1)
 
