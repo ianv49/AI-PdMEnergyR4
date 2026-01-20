@@ -31,6 +31,7 @@ AI-EnergyForcastR4/
 ├── db/                   # Database setup and connectors
 │   └── schema.sql        # SQL commands to create tables
 │   └── db_connector.py   # Python script to insert/read data
+│   └── db_ingest.py      # Python script to move data in sql 
 │
 ├── preprocessing/        # Data cleaning scripts
 │   └── preprocess.py     # First script: normalize and clean sensor logs
@@ -44,27 +45,16 @@ AI-EnergyForcastR4/
 ## my notes
 '''bash
 Perfect 🎉 — that package list shows your environment is now fully set up and healthy. You’ve got all the core libraries installed:
-
 requests → API calls and HTTP requests
-
 pandas → data handling and analysis
-
 numpy → numerical computations
-
 psycopg2-binary → PostgreSQL connector
-
 scikit-learn → classical machine learning models
-
 torch → PyTorch deep learning framework
-
 matplotlib → static plotting
-
 plotly → interactive charts
-
 paho-mqtt → IoT sensor communication
-
 Plus all their dependencies (like scipy, joblib, threadpoolctl, etc.). This means you’re ready to start coding your actual project.
-
 PS D:\My Documents\tools\skul\bsu2024\bsu_mot512_thesis1\GithubVisualStudioCode\AI-EnergyForcastR4> python -m pip list
 Package            Version
 ------------------ -----------
@@ -117,7 +107,7 @@ in cmd> <"D:\My Documents\tools\postgresql\pgsql\bin\pg_ctl.exe" -D "D:\My Docum
 in cmd> <"D:\My Documents\tools\postgresql\pgsql\bin\pg_ctl.exe" -D "D:\My Documents\tools\postgresql\pgsql\data" restart>]
 
 step notes;
-260119;
+...notes 260119;
 Phase,Item,Status
 Phase 1: Environment Setup,Install PostgreSQL portable binaries,Done
 Phase 1: Environment Setup,Initialize database cluster (initdb),Done
@@ -140,3 +130,6 @@ Phase 5: Enhancements,Optional: pretty table output,Pending
 Phase 6: Next Steps,Automate ingestion (batch file or cron job),Pending
 Phase 6: Next Steps,Extend ingestion for CSV/real sensor streams,Pending
 Phase 6: Next Steps,Dashboard/visualization integration,Pending
+...notes 260120;
+sql password = PdM
+
