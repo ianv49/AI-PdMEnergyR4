@@ -142,36 +142,48 @@ Phase 6: Next Steps,Dashboard/visualization integration,Pending
 
 ...notes 260120;
 sql password = PdM
-Phase 1: Environment Setup
-Install PostgreSQL portable binaries → Done
-Initialize database cluster (initdb) → Done
-Start PostgreSQL manually (pg_ctl) → Done
-Connect with psql → Done
-Phase 2: Database Schema
-Create energy_db database → Done
-Define sensor_data table schema → Done
-Verify schema with \d sensor_data → Done
-Phase 3: Python Integration
-Install psycopg2 driver → Done
-Create db_ingest.py script → Done
-Connect Python to PostgreSQL → Done
-Insert test row via Python → Done
-Fetch and display rows via Python → Done
-Phase 4: Log Ingestion
-Adapt script to read sensor_logs.txt → Done
-Insert multiple rows from file → Done
-Verify ingestion with query output → Done
-Phase 5 Completion Checklist
-Format timestamp output (seconds only) → Done
-Pretty table output → Done
-Row count before/after ingestion → Done
-Skip header line in text ingestion → Done
-Modularize connection (db_connector.py) → Done
-Add test script (test_connection.py) → Done
-Show top/bottom rows in test script → Done
-Handle duplicate entries (unique timestamp + ON CONFLICT) → Done 
-Phase 6: Next Steps
-Automate ingestion (batch file or cron job) → Pending
-Extend ingestion for CSV/real sensor streams → Pending
-Dashboard/visualization integration → Pending
-Add permanent log file output (logs/ingestion.log) → Pending
+Phase,Item,Status
+Phase 1: Environment Setup,Install PostgreSQL portable binaries,Done
+Phase 1: Environment Setup,Initialize database cluster (initdb),Done
+Phase 1: Environment Setup,Start PostgreSQL manually (pg_ctl),Done
+Phase 1: Environment Setup,Connect with psql,Done
+Phase 2: Database Schema,Create energy_db database,Done
+Phase 2: Database Schema,Define sensor_data table schema,Done
+Phase 2: Database Schema,Verify schema with \d sensor_data,Done
+Phase 3: Python Integration,Install psycopg2 driver,Done
+Phase 3: Python Integration,Create db_ingest.py script,Done
+Phase 3: Python Integration,Connect Python to PostgreSQL,Done
+Phase 3: Python Integration,Insert test row via Python,Done
+Phase 3: Python Integration,Fetch and display rows via Python,Done
+Phase 4: Log Ingestion,Adapt script to read sensor_logs.txt,Done
+Phase 4: Log Ingestion,Insert multiple rows from file,Done
+Phase 4: Log Ingestion,Verify ingestion with query output,Done
+Phase 5: Enhancements,Handle duplicate entries (unique timestamp + ON CONFLICT),Done
+Phase 5: Enhancements,Format timestamp output (seconds only),Done
+Phase 5: Enhancements,Pretty table output (tabulate),Done
+Phase 5: Enhancements,Row count before/after ingestion,Done
+Phase 5: Enhancements,Skip header line in text ingestion,Done
+Phase 5: Enhancements,Modularize connection into db_connector.py,Done
+Phase 5: Enhancements,Add test_connection.py script,Done
+Phase 5: Enhancements,Show top/bottom rows in test script,Done
+Phase 6: Next Steps,Automate ingestion (batch file or cron job),Pending
+Phase 6: Next Steps,Extend ingestion for CSV/real sensor streams,Pending
+Phase 6: Next Steps,Dashboard/visualization integration,Pending
+Phase 6: Next Steps,Add permanent log file output (logs/ingestion.log),Done
+Phase 6: Next Steps,Daily log rotation (TimedRotatingFileHandler),Done
+Phase 7: Visualization & Dashboard,Plot temperature vs timestamp chart,Pending
+Phase 7: Visualization & Dashboard,Add multiple charts (humidity, irradiance, wind speed),Pending
+Phase 7: Visualization & Dashboard,Build simple dashboard (Streamlit or Grafana),Pending
+Phase 8: Real-Time Ingestion,Simulate sensor streams (append rows every minute),Pending
+Phase 8: Real-Time Ingestion,Enable continuous ingestion pipeline,Pending
+Phase 9: Predictive Analytics,Calculate averages/min/max/moving averages,Pending
+Phase 9: Predictive Analytics,Train ML model for forecasting (scikit-learn),Pending
+Phase 10: Deployment & Scaling,Containerize with Docker,Pending
+Phase 10: Deployment & Scaling,Deploy to cloud (AWS/Azure/GCP),Pending
+Phase 11: Web-Sensor Data Integration,Connect to OpenWeather API for local weather data,Pending
+Phase 11: Web-Sensor Data Integration,Ingest NASA POWER API for solar irradiance and climate data,Pending
+Phase 11: Web-Sensor Data Integration,Integrate PVOutput API for solar PV system performance,Pending
+Phase 11: Web-Sensor Data Integration,Optional: Add other APIs (NOAA, Meteostat, etc.),Pending
+Phase 11: Web-Sensor Data Integration,Normalize and store web-sensor data into sensor_data table,Pending
+Phase 11: Web-Sensor Data Integration,Combine local sensor + web API data for richer analytics,Pending
+
