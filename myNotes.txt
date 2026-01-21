@@ -1,3 +1,4 @@
+..notes 1130am.
 [a]Step‑by‑Step: Fix pip Not Recognized
 Step 1: Check Python installation. Open VS Code terminal and type:
 python --version <--done
@@ -117,11 +118,107 @@ python -m streamlit run dashboard.py  <--done
 result;
 http://localhost:8501/ website was open automatic.
 A table of latest sensor data. Line charts for temperature, humidity, irradiance, and wind speed.
-
-[e]
+  You can find our privacy policy at https://streamlit.io/privacy-policy
+  Summary:
+  - This open source library collects usage statistics.
+  - We cannot see and do not store information contained inside Streamlit apps,
+    such as text, charts, images, etc.
+  - Telemetry data is stored in servers in the United States.
+  - If you'd like to opt out, add the following to %userprofile%/.streamlit/config.toml,
+    creating that file if necessary:
+    [browser]
+    gatherUsageStats = false
+  You can now view your Streamlit app in your browser.
+  Local URL: http://localhost:8501
+  Network URL: http://10.243.123.211:8501
 
 [z]do give detail steps, 
 do align it for newbie user,
 give full code to copy-paste.
 ================================================
 
+..notes 1230pm.
+[a]powershell console did not go back to comand line from ealier comand of 'python -m streamlit run dashboard.py'
+
+[b]Step 2: Create the improved dashboard script
+Make sure you’re in your repo root. Open dashboard.py and replace its contents with this full code.  <--done
+
+[c]Step 3: Run the dashboard
+From repo root. 'python -m streamlit run dashboard.py'  <--not done
+
+[z]do give detail steps, 
+do align it for newbie user,
+give full code to copy-paste.
+================================================
+..notes 1245pm.
+[a]Step‑by‑Step: Running Streamlit Dashboard
+Step 1: Open VS Code Terminal. In VS Code, press Ctrl+` to open the terminal.  <--it does not go to terminal.
+did try to find terminal panel via icon click.
+
+[b]Step 2: Run the dashboard. Type:
+python -m streamlit run dashboard.py  <--nothing happen.
+
+[c]Step 3: Stop the server (return to command line)
+Go back to the PowerShell/VS Code terminal.
+Press Ctrl + C (hold Control and press C).  <--done
+result; powershell command line now ok.
+
+[d]Step 4: (Optional) Run in background
+If you want PowerShell free while dashboard runs:
+start python -m streamlit run dashboard.py  <--done
+result;
+Start-Process : A parameter cannot be found that matches parameter name 'm'.
+At line:1 char:14
++ start python -m streamlit run dashboard.py
++              ~~
+    + CategoryInfo          : InvalidArgument: (:) [Start-Process], ParameterBindingException
+    + FullyQualifiedErrorId : NamedParameterNotFound,Microsoft.PowerShell.Commands.StartProcessCommand
+
+[d]Full Code for dashboard.py (copy‑paste ready)
+copy paste to file.  <--done
+
+[z]do give detail steps, 
+do align it for newbie user,
+give full code to copy-paste.
+================================================
+
+..notes 1255pm
+[a]Step‑by‑Step: Running Streamlit Dashboard (Beginner Friendly)
+Step 1: Open a terminal correctly
+Since `Ctrl+`` didn’t work for you, let’s use the icon method:
+In VS Code, look at the bottom panel.  <--done
+Find the “Terminal” tab (usually next to “Problems” and “Output”).
+If you don’t see it, go to the top menu:
+Click View → Terminal.
+A panel will open at the bottom with a PowerShell or Command Prompt session.
+
+[b]Step 2: Navigate to your repo root
+In the terminal, type:
+cd "D:\My Documents\tools\skul\bsu2024\GithubVisualStudioCode\AI-EnergyForcastR4"  <--done
+result;
+PS D:\My Documents\tools\skul\bsu2024\bsu_mot512_thesis1\GithubVisualStudioCode> cd "D:\My Documents\tools\skul\bsu2024\GithubVisualStudioCode\AI-EnergyForcastR4"
+cd : Cannot find path 'D:\My 
+Documents\tools\skul\bsu2024\GithubVisualStudioCode\AI-EnergyForcastR4' because it does     
+not exist.
+At line:1 char:1
++ cd "D:\My Documents\tools\skul\bsu2024\GithubVisualStudioCode\AI-Ener ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (D:\My Documents...EnergyForcastR4:String) [  
+   Set-Location], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationComman  
+   d
+
+PS D:\My Documents\tools\skul\bsu2024\bsu_mot512_thesis1\GithubVisualStudioCode>
+
+[c]Step 5: (Optional) Run in background
+The PowerShell error happened because start doesn’t accept -m directly.
+Instead, use this command. 
+<Start-Process python "-m streamlit run dashboard.py">  <--done
+result;
+PS D:\My Documents\tools\skul\bsu2024\bsu_mot512_thesis1\GithubVisualStudioCode\AI-EnergyForcastR4> Start-Process python "-m streamlit run dashboard.py"
+PS D:\My Documents\tools\skul\bsu2024\bsu_mot512_thesis1\GithubVisualStudioCode\AI-EnergyForcastR4>
+
+[z]do give detail steps, 
+do align it for newbie user,
+give full code to copy-paste.
+================================================
