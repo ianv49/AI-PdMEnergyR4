@@ -248,3 +248,10 @@ Phase 11: Web-Sensor Data Integration,Integrate PVOutput API for solar PV system
 Phase 11: Web-Sensor Data Integration,Optional: Add other APIs (NOAA, Meteostat, etc.),Pending
 Phase 11: Web-Sensor Data Integration,Normalize and store web-sensor data into sensor_data table,Pending
 Phase 11: Web-Sensor Data Integration,Combine local sensor + web API data for richer analytics,Pending
+...Recap
+    Use View → Terminal if `Ctrl+`` doesn’t work.
+    Run dashboard → python -m streamlit run dashboard.py.
+    Stop dashboard → Ctrl + C.
+    Optional background run → Start-Process python "-m streamlit run dashboard.py".
+    Now dashboard should run reliably.
+    next to add OpenWeather API ingestion so dashboard shows both local sensor data and live weather data.
