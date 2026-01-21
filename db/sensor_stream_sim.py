@@ -23,4 +23,6 @@ while True:
     print(f"Added row: {row.strip()}")
 
     # Wait 60 seconds before next reading
-    time.sleep(60)
+    #time.sleep(5)  #5sec
+    #time.sleep(60) #1min
+    time.sleep(300) #5min
