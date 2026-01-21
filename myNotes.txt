@@ -1,0 +1,127 @@
+[a]Step‑by‑Step: Fix pip Not Recognized
+Step 1: Check Python installation. Open VS Code terminal and type:
+python --version <--done
+result; Python 3.14.2
+
+[b]Step 2: Use python -m pip instead of pip
+Run this command in your repo root. <--done
+python -m pip install streamlit pandas psycopg2 tabulate
+result;
+Collecting streamlit
+  Downloading streamlit-1.53.0-py3-none-any.whl.metadata (10 kB)
+Requirement already satisfied: pandas in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (2.3.3)
+Requirement already satisfied: psycopg2 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (2.9.11)
+Requirement already satisfied: tabulate in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (0.9.0)
+Collecting altair!=5.4.0,!=5.4.1,<7,>=4.0 (from streamlit)
+  Downloading altair-6.0.0-py3-none-any.whl.metadata (11 kB)
+Collecting blinker<2,>=1.5.0 (from streamlit)
+  Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting cachetools<7,>=5.5 (from streamlit)
+  Downloading cachetools-6.2.4-py3-none-any.whl.metadata (5.6 kB)
+Collecting click<9,>=7.0 (from streamlit)
+  Downloading click-8.3.1-py3-none-any.whl.metadata (2.6 kB)
+Requirement already satisfied: numpy<3,>=1.23 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from streamlit) (2.4.1)
+Requirement already satisfied: packaging>=20 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from streamlit) (25.0)
+Requirement already satisfied: pillow<13,>=7.1.0 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from streamlit) (12.1.0)
+Collecting protobuf<7,>=3.20 (from streamlit)
+  Downloading protobuf-6.33.4-cp310-abi3-win_amd64.whl.metadata (593 bytes)
+Collecting pyarrow>=7.0 (from streamlit)
+  Downloading pyarrow-23.0.0-cp314-cp314-win_amd64.whl.metadata (3.1 kB)
+Requirement already satisfied: requests<3,>=2.27 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from streamlit) (2.32.5)
+Collecting tenacity<10,>=8.1.0 (from streamlit)
+  Downloading tenacity-9.1.2-py3-none-any.whl.metadata (1.2 kB)
+Collecting toml<2,>=0.10.1 (from streamlit)
+  Downloading toml-0.10.2-py2.py3-none-any.whl.metadata (7.1 kB)
+Requirement already satisfied: typing-extensions<5,>=4.10.0 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from streamlit) (4.15.0)
+Collecting watchdog<7,>=2.1.5 (from streamlit)
+  Downloading watchdog-6.0.0-py3-none-win_amd64.whl.metadata (44 kB)
+Collecting gitpython!=3.1.19,<4,>=3.0.7 (from streamlit)
+  Downloading gitpython-3.1.46-py3-none-any.whl.metadata (13 kB)
+Collecting pydeck<1,>=0.8.0b4 (from streamlit)
+  Downloading pydeck-0.9.1-py2.py3-none-any.whl.metadata (4.1 kB)
+Collecting tornado!=6.5.0,<7,>=6.0.3 (from streamlit)
+  Downloading tornado-6.5.4-cp39-abi3-win_amd64.whl.metadata (2.9 kB)
+Requirement already satisfied: python-dateutil>=2.8.2 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from pandas) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from pandas) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from pandas) (2025.3)
+Requirement already satisfied: jinja2 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from altair!=5.4.0,!=5.4.1,<7,>=4.0->streamlit) (3.1.6)
+Collecting jsonschema>=3.0 (from altair!=5.4.0,!=5.4.1,<7,>=4.0->streamlit)
+  Downloading jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)
+Requirement already satisfied: narwhals>=1.27.1 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from altair!=5.4.0,!=5.4.1,<7,>=4.0->streamlit) (2.15.0)
+Collecting colorama (from click<9,>=7.0->streamlit)
+  Downloading colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+Collecting gitdb<5,>=4.0.1 (from gitpython!=3.1.19,<4,>=3.0.7->streamlit)
+  Downloading gitdb-4.0.12-py3-none-any.whl.metadata (1.2 kB)
+Collecting smmap<6,>=3.0.1 (from gitdb<5,>=4.0.1->gitpython!=3.1.19,<4,>=3.0.7->streamlit)
+  Downloading smmap-5.0.2-py3-none-any.whl.metadata (4.3 kB)
+Requirement already satisfied: charset_normalizer<4,>=2 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from requests<3,>=2.27->streamlit) (3.4.4)
+Requirement already satisfied: idna<4,>=2.5 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from requests<3,>=2.27->streamlit) (3.11)
+Requirement already satisfied: urllib3<3,>=1.21.1 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from requests<3,>=2.27->streamlit) (2.6.3)
+Requirement already satisfied: certifi>=2017.4.17 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from requests<3,>=2.27->streamlit) (2026.1.4)
+Requirement already satisfied: MarkupSafe>=2.0 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from jinja2->altair!=5.4.0,!=5.4.1,<7,>=4.0->streamlit) (3.0.3)
+Collecting attrs>=22.2.0 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<7,>=4.0->streamlit)
+  Downloading attrs-25.4.0-py3-none-any.whl.metadata (10 kB)
+Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<7,>=4.0->streamlit)
+  Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+Collecting referencing>=0.28.4 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<7,>=4.0->streamlit)
+  Downloading referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+Collecting rpds-py>=0.25.0 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<7,>=4.0->streamlit)
+  Downloading rpds_py-0.30.0-cp314-cp314-win_amd64.whl.metadata (4.2 kB)
+Requirement already satisfied: six>=1.5 in c:\users\ffx3nb\appdata\local\python\pythoncore-3.14-64\lib\site-packages (from python-dateutil>=2.8.2->pandas) (1.17.0)
+Downloading streamlit-1.53.0-py3-none-any.whl (9.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.1/9.1 MB 370.4 kB/s  0:00:40
+Downloading altair-6.0.0-py3-none-any.whl (795 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 795.4/795.4 kB 628.1 kB/s  0:00:01
+Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Downloading cachetools-6.2.4-py3-none-any.whl (11 kB)
+Downloading click-8.3.1-py3-none-any.whl (108 kB)
+Downloading gitpython-3.1.46-py3-none-any.whl (208 kB)
+Downloading gitdb-4.0.12-py3-none-any.whl (62 kB)
+Downloading protobuf-6.33.4-cp310-abi3-win_amd64.whl (436 kB)
+Downloading pydeck-0.9.1-py2.py3-none-any.whl (6.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 815.3 kB/s  0:00:08
+Downloading smmap-5.0.2-py3-none-any.whl (24 kB)
+Downloading tenacity-9.1.2-py3-none-any.whl (28 kB)
+Downloading toml-0.10.2-py2.py3-none-any.whl (16 kB)
+Downloading tornado-6.5.4-cp39-abi3-win_amd64.whl (446 kB)
+Downloading watchdog-6.0.0-py3-none-win_amd64.whl (79 kB)
+Downloading jsonschema-4.26.0-py3-none-any.whl (90 kB)
+Downloading attrs-25.4.0-py3-none-any.whl (67 kB)
+Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+Downloading pyarrow-23.0.0-cp314-cp314-win_amd64.whl (28.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 28.3/28.3 MB 824.9 kB/s  0:00:33
+Downloading referencing-0.37.0-py3-none-any.whl (26 kB)
+Downloading rpds_py-0.30.0-cp314-cp314-win_amd64.whl (228 kB)
+Downloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Installing collected packages: watchdog, tornado, toml, tenacity, smmap, rpds-py, pyarrow, protobuf, colorama, cachetools, blinker, attrs, referencing, pydeck, gitdb, click, jsonschema-specifications, gitpython, jsonschema, altair, streamlit
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  0/21 [watchdog]  WARNING: The script watchmedo.exe is installed in 'C:\Users\ffx3nb\AppData\Local\Python\pythoncore-3.14-64\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━ 18/21 [jsonschema]  WARNING: The script jsonschema.exe is installed in 'C:\Users\ffx3nb\AppData\Local\Python\pythoncore-3.14-64\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━ 20/21 [streamlit]  WARNING: The script streamlit.exe is installed in 'C:\Users\ffx3nb\AppData\Local\Python\pythoncore-3.14-64\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+Successfully installed altair-6.0.0 attrs-25.4.0 blinker-1.9.0 cachetools-6.2.4 click-8.3.1 colorama-0.4.6 gitdb-4.0.12 gitpython-3.1.46 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 protobuf-6.33.4 pyarrow-23.0.0 pydeck-0.9.1 referencing-0.37.0 rpds-py-0.30.0 smmap-5.0.2 streamlit-1.53.0 tenacity-9.1.2 toml-0.10.2 tornado-6.5.4 watchdog-6.0.0
+
+[c]Step 3: Verify installation
+Check that Streamlit is installed: <--done
+python -m streamlit --version  <--done
+result;
+Streamlit, version 1.53.0
+
+[d]Step‑by‑Step: Create Dashboard Script
+Step 1: Make a new file. Create a file in your repo root called:
+dashboard.py  <--done
+Step 2: Copy‑paste this full code.  <--done
+Step 3: Run the dashboard. From repo root, run.  <--done
+python -m streamlit run dashboard.py  <--done
+result;
+http://localhost:8501/ website was open automatic.
+A table of latest sensor data. Line charts for temperature, humidity, irradiance, and wind speed.
+
+[e]
+
+[z]do give detail steps, 
+do align it for newbie user,
+give full code to copy-paste.
+================================================
+
