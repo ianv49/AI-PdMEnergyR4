@@ -222,3 +222,26 @@ PS D:\My Documents\tools\skul\bsu2024\bsu_mot512_thesis1\GithubVisualStudioCode\
 do align it for newbie user,
 give full code to copy-paste.
 ================================================
+
+[a]show the latest recap on the list of phase1 to phase11, use csv.
+
+[b]remember this; Add Phase 11 (Web‑Sensor Data Integration)
+OpenWeather API → gives real‑time weather (temperature, humidity, wind speed).
+NASA POWER API → provides solar irradiance, climate, and meteorological data.
+PVOutput API → community solar PV system performance data.
+Other APIs → NOAA, Meteostat, or regional feeds for redundancy.
+These APIs let you augment your local sensor data with external context, making your predictive maintenance app more accurate and scalable.
+
+[c]Beginner Recap
+Use View → Terminal if `Ctrl+`` doesn’t work.
+Navigate to repo root with cd.
+Run dashboard → python -m streamlit run dashboard.py.
+Stop dashboard → Ctrl + C.
+Optional background run → Start-Process python "-m streamlit run dashboard.py".
+Now your dashboard should run reliably.
+next to add OpenWeather API ingestion so dashboard shows both local sensor data and live weather data.
+
+[z]do give detail steps, 
+do align it for newbie user,
+give full code to copy-paste.
+================================================
