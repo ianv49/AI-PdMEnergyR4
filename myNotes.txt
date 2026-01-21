@@ -132,9 +132,6 @@ A table of latest sensor data. Line charts for temperature, humidity, irradiance
   Local URL: http://localhost:8501
   Network URL: http://10.243.123.211:8501
 
-[z]do give detail steps, 
-do align it for newbie user,
-give full code to copy-paste.
 ================================================
 
 ..notes 1230pm.
@@ -146,9 +143,6 @@ Make sure you’re in your repo root. Open dashboard.py and replace its contents
 [c]Step 3: Run the dashboard
 From repo root. 'python -m streamlit run dashboard.py'  <--not done
 
-[z]do give detail steps, 
-do align it for newbie user,
-give full code to copy-paste.
 ================================================
 ..notes 1245pm.
 [a]Step‑by‑Step: Running Streamlit Dashboard
@@ -177,9 +171,6 @@ At line:1 char:14
 [d]Full Code for dashboard.py (copy‑paste ready)
 copy paste to file.  <--done
 
-[z]do give detail steps, 
-do align it for newbie user,
-give full code to copy-paste.
 ================================================
 
 ..notes 1255pm
@@ -218,9 +209,6 @@ result;
 PS D:\My Documents\tools\skul\bsu2024\bsu_mot512_thesis1\GithubVisualStudioCode\AI-EnergyForcastR4> Start-Process python "-m streamlit run dashboard.py"
 PS D:\My Documents\tools\skul\bsu2024\bsu_mot512_thesis1\GithubVisualStudioCode\AI-EnergyForcastR4>
 
-[z]do give detail steps, 
-do align it for newbie user,
-give full code to copy-paste.
 ================================================
 
 [a]show the latest recap on the list of phase1 to phase11, use csv.
@@ -241,9 +229,6 @@ Optional background run → Start-Process python "-m streamlit run dashboard.py"
 Now your dashboard should run reliably.
 next to add OpenWeather API ingestion so dashboard shows both local sensor data and live weather data.
 
-[z]do give detail steps, 
-do align it for newbie user,
-give full code to copy-paste.
 ================================================
 
 [a]Phase 11: OpenWeather API Ingestion (Beginner Friendly)
@@ -285,9 +270,6 @@ folders ready: api_wrappers, data, db, logs, notebooks, preprocessing, sensors.
 
 [h]how to open again the cmd window of sql.
 
-[z]do give detail steps, 
-do align it for newbie user,
-give full code to copy-paste.
 ================================================
 
 [a]Step‑by‑Step: Fix PostgreSQL Connection Error
@@ -315,9 +297,6 @@ Suggestion [3,General]: The command pg_ctl was not found, but does exist in the 
 
 [d]step4, step5, and the rest not done.
 
-[z]do give detail steps, 
-do align it for newbie user,
-give full code to copy-paste.
 ================================================
 
 [a]Step‑by‑Step: Start PostgreSQL Server (Portable Install)
